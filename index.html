@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Remote Observatory Control Kit (rocKit)</title>
+  </head>
+  <body>
+
+<div class="col-lg-8 mx-auto p-3 py-md-5">
+  <main>
+    <h1>&#128640; Remote Observatory Control Kit</h1>
+    <hr />
+    <p class="fs-5 col-md-12">The Remote Observatory Control Kit (rockit) is a modular observatory control system for robotic observatory facilties.</p>
+    <p class="fs-5 col-md-12">It operates telescopes at the Warwick Telescope Facilities at the Roque de Los Muchachos Observatory, the Warwick campus Windmill Hill observatory, and supports GOTO-South at Siding Spring Observatory.</p>
+    <hr />
+    <p class="col-md-12">rockit is designed as a set of single-purpose system services (daemons) that communicate over a remote procedure call interface (currently Pyro4). The services each run on the machine that is most appropriate, and the software is managed using individual git repositories and rpm packages for each logical component.</p>
+
+    <p>Spreading the code over many repositories, packages, and machines might seem overly complicated at first, but this has several benefits over a single monolithic software bundle:
+    <ul>
+        <li>Everything is self-documenting and repeatable: each git repository and rpm package includes or explicitly declares all other code needed to run that component.
+        <li>The git repository (and generated rpm packages) provide the canonical state and configuration - setting up a replacement machine can be done automatically by installing the appropriate packages.
+        <li>RPM packages are automatically generated, with automated (date/revision) version numbers for Rocky Linux 9 each time a change is pushed to the repository's <span class="badge bg-secondary font-monospace fw-lighter">master</span> branch.
+    </ul>
+    <p>Machines use a system-wide python (currently 3.9) installation that is managed using rpm packages for installation and upgrades. If you need to introduce a new python module as a dependency then you should add it to the <a href="https://github.com/rockit-astro/python-dependencies/">python-dependencies</a> repository instead of using pip. This ensures a documented and repeatable versioning for all dependencies.</p>
+    </p>
+    <hr />
+    <p class="fst-italic">TODO: Add a table listing the daemons grouped by type.</p>
+  </main>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
