@@ -1,0 +1,91 @@
+<mxfile host="Electron" modified="2023-07-30T13:05:50.954Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="-VABEeW8oC6nGI85749s" version="21.6.5" type="device">
+  <diagram name="Page-1" id="6133507b-19e7-1e82-6fc7-422aa6c4b21f">
+    <mxGraphModel dx="1061" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="500" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-19" value="Dome 1" style="swimlane;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;swimlaneLine=1;glass=0;rounded=1;shadow=0;" parent="1" vertex="1">
+          <mxGeometry x="160" y="20" width="270" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-27" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Data Pipeline&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Data written to&lt;br&gt;fits image headers&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" parent="WQwjXUWEzfGx3JPkcmVE-19" vertex="1">
+          <mxGeometry x="10" y="30" width="120" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-30" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Operations&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Determine whether&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;it is safe for the dome to be open&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" parent="WQwjXUWEzfGx3JPkcmVE-19" vertex="1">
+          <mxGeometry x="140" y="30" width="120" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-34" value="Polls" style="endArrow=classic;endSize=10;endFill=1;html=1;rounded=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" edge="1" target="WQwjXUWEzfGx3JPkcmVE-74">
+          <mxGeometry x="-0.331" y="-2" width="160" relative="1" as="geometry">
+            <mxPoint x="375" y="145" as="sourcePoint" />
+            <mxPoint x="283" y="215" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-49" value="Web Dashboard" style="swimlane;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;swimlaneLine=1;glass=0;rounded=1;shadow=0;" parent="1" vertex="1">
+          <mxGeometry x="210" y="335" width="300" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-50" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Live Status&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Reports current&lt;br&gt;environment&lt;br&gt;summary&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" parent="WQwjXUWEzfGx3JPkcmVE-49" vertex="1">
+          <mxGeometry x="10" y="30" width="120" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-51" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Weather Database&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Records historical&lt;br&gt;environment status at&lt;br&gt;reduced time resolution&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" parent="WQwjXUWEzfGx3JPkcmVE-49" vertex="1">
+          <mxGeometry x="140" y="30" width="150" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-62" value="Interactive Users" style="swimlane;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;swimlaneLine=1;glass=0;rounded=1;shadow=0;" parent="1" vertex="1">
+          <mxGeometry x="535" y="335" width="140" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-63" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Environment Client&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Reports current&lt;br&gt;environment&lt;br&gt;summary&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" parent="WQwjXUWEzfGx3JPkcmVE-62" vertex="1">
+          <mxGeometry x="10" y="30" width="120" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-83" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=classic;entryX=0.895;entryY=1.002;entryDx=0;entryDy=0;endFill=1;endSize=10;exitX=0.237;exitY=0.003;exitDx=0;exitDy=0;entryPerimeter=0;exitPerimeter=0;" parent="1" source="WQwjXUWEzfGx3JPkcmVE-62" target="WQwjXUWEzfGx3JPkcmVE-74" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-84" value="&lt;br&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="WQwjXUWEzfGx3JPkcmVE-83" vertex="1" connectable="0">
+          <mxGeometry x="0.5009" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-85" value="Polls" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="WQwjXUWEzfGx3JPkcmVE-83" vertex="1" connectable="0">
+          <mxGeometry x="0.4313" relative="1" as="geometry">
+            <mxPoint y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="Environment Daemon" treeRoot="1" id="WQwjXUWEzfGx3JPkcmVE-74">
+          <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" parent="1" vertex="1">
+            <mxGeometry x="300" y="195" width="300" height="90" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="WQwjXUWEzfGx3JPkcmVE-81" value="Polls" style="endArrow=classic;endSize=10;endFill=1;html=1;rounded=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" edge="1" target="WQwjXUWEzfGx3JPkcmVE-74">
+          <mxGeometry x="-0.331" y="-2" width="160" relative="1" as="geometry">
+            <mxPoint x="525" y="145" as="sourcePoint" />
+            <mxPoint x="385" y="205" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ElBNomSuLeqGJ3A_W--1" value="Dome 1" style="swimlane;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;swimlaneLine=1;glass=0;rounded=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="470" y="20" width="270" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ElBNomSuLeqGJ3A_W--2" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Data Pipeline&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Data written to&lt;br&gt;fits image headers&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="B6ElBNomSuLeqGJ3A_W--1">
+          <mxGeometry x="10" y="30" width="120" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ElBNomSuLeqGJ3A_W--3" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Operations&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Determine whether&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;it is safe for the dome to be open&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="B6ElBNomSuLeqGJ3A_W--1">
+          <mxGeometry x="140" y="30" width="120" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ElBNomSuLeqGJ3A_W--7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=classic;entryX=0.895;entryY=1.002;entryDx=0;entryDy=0;endFill=1;endSize=10;exitX=0.237;exitY=0.003;exitDx=0;exitDy=0;entryPerimeter=0;exitPerimeter=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="359.52" y="335" as="sourcePoint" />
+            <mxPoint x="359.52" y="285" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ElBNomSuLeqGJ3A_W--8" value="&lt;br&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="B6ElBNomSuLeqGJ3A_W--7">
+          <mxGeometry x="0.5009" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ElBNomSuLeqGJ3A_W--9" value="Polls" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="B6ElBNomSuLeqGJ3A_W--7">
+          <mxGeometry x="0.4313" relative="1" as="geometry">
+            <mxPoint y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

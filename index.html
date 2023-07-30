@@ -1,35 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Remote Observatory Control Kit (rocKit)</title>
+    <title>
+      Robotic Observatory Control Kit (rockit)
+    </title>
   </head>
   <body>
-
-<div class="col-lg-8 mx-auto p-3 py-md-5">
-  <main>
-    <h1>&#128640; Remote Observatory Control Kit</h1>
-    <hr />
-    <p class="fs-5 col-md-12">The Remote Observatory Control Kit (rockit) is a modular observatory control system for robotic observatory facilties.</p>
-    <p class="fs-5 col-md-12">It operates telescopes at the Warwick Telescope Facilities at the Roque de Los Muchachos Observatory, the Warwick campus Windmill Hill observatory, and supports GOTO-South at Siding Spring Observatory.</p>
-    <hr />
-    <p class="col-md-12">rockit is designed as a set of single-purpose system services (daemons) that communicate over a remote procedure call interface (currently Pyro4). The services each run on the machine that is most appropriate, and the software is managed using individual git repositories and rpm packages for each logical component.</p>
-
-    <p>Spreading the code over many repositories, packages, and machines might seem overly complicated at first, but this has several benefits over a single monolithic software bundle:
-    <ul>
-        <li>Everything is self-documenting and repeatable: each git repository and rpm package includes or explicitly declares all other code needed to run that component.
-        <li>The git repository (and generated rpm packages) provide the canonical state and configuration - setting up a replacement machine can be done automatically by installing the appropriate packages.
-        <li>RPM packages are automatically generated, with automated (date/revision) version numbers for Rocky Linux 9 each time a change is pushed to the repository's <span class="badge bg-secondary font-monospace fw-lighter">master</span> branch.
-    </ul>
-    <p>Machines use a system-wide python (currently 3.9) installation that is managed using rpm packages for installation and upgrades. If you need to introduce a new python module as a dependency then you should add it to the <a href="https://github.com/rockit-astro/python-dependencies/">python-dependencies</a> repository instead of using pip. This ensures a documented and repeatable versioning for all dependencies.</p>
-    </p>
-    <hr />
-    <p class="fst-italic">TODO: Add a table listing the daemons grouped by type.</p>
-  </main>
-</div>
-
+    <div class="col-lg-8 mx-auto p-3 py-md-5">
+      <main>
+        <h1>
+          🚀 Robotic Observatory Control Kit
+        </h1>
+        <hr>
+        <p class="fs-5 col-md-12">
+          The Robotic Observatory Control Kit (rockit) is a modular observatory control system for robotic observatory facilties.
+        </p>
+        <p class="fs-5 col-md-12">
+          It operates telescopes at the Warwick Telescope Facilities at the Roque de Los Muchachos Observatory, the Warwick campus Windmill Hill observatory, and supports GOTO-South at Siding Spring Observatory.
+        </p>
+        <hr>
+        <p class="col-md-12">
+          rockit is designed as a set of single-purpose system services (daemons) that communicate over a remote procedure call interface (currently <code>Pyro4</code>). The services each run on the machine that is most appropriate, and the software is managed using individual git repositories and rpm packages for each logical component.
+        </p>
+        <p>
+          Spreading the code over many repositories, packages, and machines might seem overly complicated at first, but this has several benefits over a single monolithic software bundle:
+        </p>
+        <ul>
+          <li>Everything is self-documenting and repeatable: each git repository and rpm package includes or explicitly declares all other code needed to run that component.
+          </li>
+          <li>The git repository (and generated rpm packages) provide the canonical state and configuration - setting up a replacement machine can be done automatically by installing the appropriate packages.
+          </li>
+          <li>RPM packages are automatically generated, with automated (date/revision) version numbers for Rocky Linux 9 each time a change is pushed to the repository's <span class="badge bg-secondary font-monospace fw-lighter">master</span> branch.
+          </li>
+        </ul>
+        <p>
+          Machines use a system-wide python (currently 3.9) installation that is managed using rpm packages for installation and upgrades. If you need to introduce a new python module as a dependency then you should add it to the <a href="https://github.com/rockit-astro/python-dependencies/">python-dependencies</a> repository instead of using pip. This ensures a documented and repeatable versioning for all dependencies.
+        </p>
+        <hr>
+        <p>Daemons can be grouped within a few core systems, explained below (click to expand)</p>
+        <div class="accordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#system-environment">Environment Monitoring</button>
+            </h2>
+            <div id="system-environment" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <p>
+                  The environment daemon, <code>environmentd</code>, acts as a central hub aggregating the weather status for a site.
+                </p>
+                <p>
+                  It is configured to poll all of the relevant weather sensors (both internal and external) for all of the telescopes on the site, and then tracks their status over a configurable window (typically 20 minutes) to report min/max values and assign a status (safe/warn/unsafe) based on defined safety limits and the timeout window (i.e. a sensor must report safe for 20 minutes before its status will change). The polling topology is illustrated in Figure 1 below.
+                </p>
+                <figure class="figure">
+                  <img src="images/environment-sensors.svg" class="figure-img img-fluid center-block d-block mx-auto" alt="Flow diagram">
+                  <figcaption class="figure-caption">
+                    <strong>Figure 1: </strong><code>environmentd</code> polls heterogeneous information from daemons distributed across the local network to aggregate all relevant site environment data.
+                  </figcaption>
+                </figure>
+                <p>
+                  Daemons which need to access this environment data (e.g. determining whether its safe to open the dome, writing image metadata, the web dashboard) query <code>environmentd</code> and select the information that is relevant to them (a telescope in Dome 1 rarely needs to know anything about the internal state of Dome 2). This is illustrated in Figure 2 below.
+                </p>
+                <figure class="figure">
+                  <img src="images/environment-users.svg" class="figure-img img-fluid center-block d-block mx-auto" alt="Flow diagram">
+                  <figcaption class="figure-caption">
+                    <strong>Figure 2: </strong>Consumers, including <code>opsd</code>, <code>pipelined</code>, the <code>environment</code> terminal command, and the web dashboard, pull environment information from <code>enivironmentd</code>.
+                  </figcaption>
+                </figure>
+                <p>
+                  Internal dome conditions monitoring has been centralised into a custom rack-mounted device, built around a Raspberry Pi (see Figure 3 below). This <em>domealert</em> device is designed to be compatible with RoomAlert brand temperature/humidity probes, and also features switch sensors, a USB microphone (for web dashboard streaming), and a switchable mains-power pass-through for controlling a dehumidifier.
+                </p>
+                <figure class="figure">
+                  <img src="images/domealert.jpg" class="figure-img img-fluid center-block d-block mx-auto" alt="Photo of domealert units">
+                  <figcaption class="figure-caption">
+                    <strong>Figure 3: </strong>The domealert device centralises many of the required internal dome monitoring features.
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#system-pipeline">Data Pipeline</button>
+            </h2>
+            <div id="system-pipeline" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <p>
+                  The data pipeline consists of the camera control daemons (<code>camd</code> plus camera-specific plugins), and the image processing daemons (<code>pipelined</code> plus <code>pipeline_workerd</code>).
+                </p>
+                <p>
+                  <code>camd</code> is responsible for capturing an image and saving it to disk, with sufficient blank space reserved in the fits image headers for <code>pipeline_workerd</code> to insert additional information about the environment, instrument status, target information, etc.
+                </p>
+                <p>
+                  <code>pipelined</code> provides a single access point for enabling/disabling metadata calculations, and for interactive users to register ds9 frame previews. All of the actual work is performed by the <code>pipeline_workerd</code> instances (one per camera). The <code>pipeline_workerd</code> runs on the same computer as <code>camd</code> which may be a different computer to where the rest of the telescope control is managed (see Figure 4).
+                </p>
+                <figure class="figure">
+                  <img src="images/pipeline.svg" class="figure-img img-fluid center-block d-block mx-auto" alt="Flow diagram">
+                  <figcaption class="figure-caption">
+                    <strong>Figure 4: </strong>The data pipeline design allows cameras to be operated on dedicated computers, with metadata (e.g. WCS, image HFD) being sent to the operations daemon without transferring large image files over the network.
+                  </figcaption>
+                </figure>
+                <p><code>pipelined</code> can be configured to process the image data to derive quantities of interest to the operations control (see section below) or an interactive user. These include things like WCS solutions (enabling precise field acquisition), half-flux diameters (for automatic focusing), and collapsed image profiles (for auto-guiding). This information is written into fits header keys, and the full image header is sent to the operations daemon after each frame is processed.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#system-operations">Operations Control</button>
+            </h2>
+            <div id="system-operations" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <em>TODO: describe opsd and hardware control</em>
+                <em>TODO: Mention dome heartbeat monitor</em>
+                <em>TODO: mention dehumidifierd</em>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#system-dashboard">Web Dashboard</button>
+            </h2>
+            <div id="system-dashboard" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <em>TODO: describe weatherlogd and dashboard</em>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
