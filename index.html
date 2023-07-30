@@ -112,9 +112,18 @@
             </h2>
             <div id="system-operations" class="accordion-collapse collapse">
               <div class="accordion-body">
-                <em>TODO: describe opsd and hardware control</em>
-                <em>TODO: Mention dome heartbeat monitor</em>
-                <em>TODO: mention dehumidifierd</em>
+                <p>
+                  The operations daemon, <code>opsd</code> provides the high-level robotic control for a telescope system.
+                </p>
+                <p>
+                  When dome control is set to <em>automatic</em>, <code>opsd</code> is responsible for checking the environment and observation schedule to determine whether the dome should be open, and pinging the dome heartbeat. The dome heartbeat (implemented with a <a href="https://github.com/rockit-astro/dome-heartbeat-monitor">micro-controller</a> for Astrohaven domes; the half-metre <a href="https://github.com/rockit-astro/roof-controller">roof controller</a>, and the Ash dome daemon) provides a fail-safe that will automatically close the dome if it does not receive regular updates from <code>opsd</code>.
+                </p>
+                <p>
+                  When telescope control is set to <em>automatic</em>, <code>opsd</code> will follow an observing schedule defined by the user (as a json plan file). An observing plan consists of a series of <em>actions</em>, with each action implementing a unit of observation logic (e.g. taking skyflats, focusing, acquiring images on a field). The action implements the logic (by communicating with the low level daemons) to configure the telescope hardware and data pipeline, and recieves notifications with metadata when frames are acquired (see the Data Pipeline section above) to enable closed-loop logic for e.g. automatic focusing or guiding.
+                </p>
+                <p>
+                  Separately, most domes contain a dehumidifier daemon, <code>dehumidifierd</code>, which directly checks an internal humidity sensor and whether the dome is open, and toggles power to a dehumidifier if the humidity is too high and the dome is closed.
+                </p>
               </div>
             </div>
           </div>
@@ -124,7 +133,12 @@
             </h2>
             <div id="system-dashboard" class="accordion-collapse collapse">
               <div class="accordion-body">
-                <em>TODO: describe weatherlogd and dashboard</em>
+                <p>
+                  The web dashboard provides a (near-)real-time overview of the system, displaying current weather and operations status for each telescope. It also fetches webcam images and provides pass-through for live video and audio.
+                </p>
+                <p>
+                  The <code>weatherlog</code> daemon separately polls relevant environment sensors and logs the results to a database, providing a long-term view of the environment history of the site.
+                </p>
               </div>
             </div>
           </div>
